@@ -29,3 +29,17 @@ test("givenLastTurnWasXWhenNextPlayerThenO", () => {
   ticTacToe.play(1, 1);
   expect(ticTacToe.nextPlayer()).toEqual("O");
 });
+
+test("whenPlayThenNoWinner", () => {
+  const actual = ticTacToe.play(1, 1);
+  expect(actual).toEqual("No winner");
+});
+
+test("whenPlayAndWholeHorizontalLineThenWinner", () => {
+  ticTacToe.play(1, 1); // X
+  ticTacToe.play(1, 2); // O
+  ticTacToe.play(2, 1); // X
+  ticTacToe.play(2, 2); // O
+  const actual = ticTacToe.play(3, 1); // X
+  expect(actual).toEqual("X is the winner");
+});

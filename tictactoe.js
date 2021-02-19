@@ -10,8 +10,18 @@ class TicTacToe {
   play(x, y) {
     this.checkAxis(x);
     this.checkAxis(y);
-    this.setBox(x, y);
     this.lastPlayer = this.nextPlayer();
+    this.setBox(x, y);
+    for (let index = 0; index < this.board.length; index++) {
+      if (
+        this.board[0][index] === this.lastPlayer &&
+        this.board[1][index] === this.lastPlayer &&
+        this.board[2][index] === this.lastPlayer
+      ) {
+        return `${this.lastPlayer} is the winner`;
+      }
+    }
+    return "No winner";
   }
 
   checkAxis(axis) {
