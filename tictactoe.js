@@ -5,10 +5,13 @@ class TicTacToe {
     ["", "", ""],
   ];
 
+  lastPlayer = "";
+
   play(x, y) {
     this.checkAxis(x);
     this.checkAxis(y);
     this.setBox(x, y);
+    this.lastPlayer = this.nextPlayer();
   }
 
   checkAxis(axis) {
@@ -23,6 +26,11 @@ class TicTacToe {
     } else {
       this.board[x - 1][y - 1] = "X";
     }
+  }
+
+  nextPlayer() {
+    if (this.lastPlayer === "X") return "O";
+    return "X";
   }
 }
 module.exports = TicTacToe;
