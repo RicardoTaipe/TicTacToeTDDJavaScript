@@ -1,4 +1,6 @@
 class TicTacToe {
+  SIZE = 3;
+
   board = [
     ["", "", ""],
     ["", "", ""],
@@ -12,15 +14,10 @@ class TicTacToe {
     this.checkAxis(y);
     this.lastPlayer = this.nextPlayer();
     this.setBox(x, y);
-    for (let index = 0; index < this.board.length; index++) {
-      if (
-        this.board[0][index] === this.lastPlayer &&
-        this.board[1][index] === this.lastPlayer &&
-        this.board[2][index] === this.lastPlayer
-      ) {
-        return `${this.lastPlayer} is the winner`;
-      }
+    if (this.isWin()) {
+      return `${this.lastPlayer} is the winner`;
     }
+
     return "No winner";
   }
 
@@ -41,6 +38,19 @@ class TicTacToe {
   nextPlayer() {
     if (this.lastPlayer === "X") return "O";
     return "X";
+  }
+
+  isWin() {
+    for (let index = 0; index < this.SIZE; index++) {
+      const winner = this.lastPlayer.repeat(3);
+      if (
+        this.board[0][index] + this.board[1][index] + this.board[2][index] ===
+        winner
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 module.exports = TicTacToe;
