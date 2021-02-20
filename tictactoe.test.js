@@ -43,3 +43,14 @@ test("whenPlayAndWholeHorizontalLineThenWinner", () => {
   const actual = ticTacToe.play(3, 1); // X
   expect(actual).toEqual("X is the winner");
 });
+
+test("whenPlayAndWholeVeticalLineThenWinner", () => {
+  ticTacToe.play(2, 1); // X
+  ticTacToe.play(1, 1); // O
+  ticTacToe.play(3, 1); // X
+  ticTacToe.play(1, 2); // O
+  ticTacToe.play(2, 2); // X
+  const actual = ticTacToe.play(1, 3); // O
+  //console.table(ticTacToe); this help to see the actual board
+  expect(actual).toEqual("O is the winner");
+});

@@ -13,11 +13,10 @@ class TicTacToe {
     this.checkAxis(x);
     this.checkAxis(y);
     this.lastPlayer = this.nextPlayer();
-    this.setBox(x, y);
+    this.setBox(x, y, this.lastPlayer);
     if (this.isWin()) {
       return `${this.lastPlayer} is the winner`;
     }
-
     return "No winner";
   }
 
@@ -26,12 +25,12 @@ class TicTacToe {
       throw new Error("Outside board");
     }
   }
-
-  setBox(x, y) {
+  //order change y,x due to array javascript order
+  setBox(y, x, lastPlayer) {
     if (this.board[x - 1][y - 1] !== "") {
       throw new Error("Box is occupied");
     } else {
-      this.board[x - 1][y - 1] = "X";
+      this.board[x - 1][y - 1] = lastPlayer;
     }
   }
 
@@ -41,11 +40,16 @@ class TicTacToe {
   }
 
   isWin() {
+    const playerTotal = this.lastPlayer.repeat(3);
     for (let index = 0; index < this.SIZE; index++) {
-      const winner = this.lastPlayer.repeat(3);
       if (
         this.board[0][index] + this.board[1][index] + this.board[2][index] ===
-        winner
+        playerTotal
+      ) {
+        return true;
+      } else if (
+        this.board[index][0] + this.board[index][1] + this.board[index][2] ===
+        playerTotal
       ) {
         return true;
       }
