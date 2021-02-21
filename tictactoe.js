@@ -41,7 +41,11 @@ class TicTacToe {
 
   isWin() {
     const playerTotal = this.lastPlayer.repeat(3);
+    let diagonal1 = "";
+    let diagonal2 = "";
     for (let index = 0; index < this.SIZE; index++) {
+      diagonal1 += this.board[index][index];
+      diagonal2 += this.board[index][this.SIZE - index - 1];
       if (
         this.board[0][index] + this.board[1][index] + this.board[2][index] ===
         playerTotal
@@ -51,6 +55,9 @@ class TicTacToe {
         this.board[index][0] + this.board[index][1] + this.board[index][2] ===
         playerTotal
       ) {
+        return true;
+      }
+      if (diagonal1 === playerTotal || diagonal2 === playerTotal) {
         return true;
       }
     }

@@ -54,3 +54,21 @@ test("whenPlayAndWholeVeticalLineThenWinner", () => {
   //console.table(ticTacToe); this help to see the actual board
   expect(actual).toEqual("O is the winner");
 });
+
+test("whenPlayAndTopBottomDiagonalLineThenWinner", () => {
+  ticTacToe.play(1, 1); // X
+  ticTacToe.play(1, 2); // O
+  ticTacToe.play(2, 2); // X
+  ticTacToe.play(1, 3); // O
+  const actual = ticTacToe.play(3, 3); // X
+  expect(actual).toEqual("X is the winner");
+});
+
+test("whenPlayAndBottomTopDiagonalLineThenWinner", () => {
+  ticTacToe.play(1, 3); // X
+  ticTacToe.play(1, 1); // O
+  ticTacToe.play(2, 2); // X
+  ticTacToe.play(1, 2); // O
+  const actual = ticTacToe.play(3, 1); // X
+  expect(actual).toEqual("X is the winner");
+});
