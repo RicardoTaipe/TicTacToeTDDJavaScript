@@ -72,3 +72,16 @@ test("whenPlayAndBottomTopDiagonalLineThenWinner", () => {
   const actual = ticTacToe.play(3, 1); // X
   expect(actual).toEqual("X is the winner");
 });
+
+test("whenAllBoxesAreFilledThenDraw", () => {
+  ticTacToe.play(1, 1);
+  ticTacToe.play(1, 2);
+  ticTacToe.play(1, 3);
+  ticTacToe.play(2, 1);
+  ticTacToe.play(2, 3);
+  ticTacToe.play(2, 2);
+  ticTacToe.play(3, 1);
+  ticTacToe.play(3, 3);
+  const actual = ticTacToe.play(3, 2);
+  expect(actual).toEqual("The result is draw");
+});

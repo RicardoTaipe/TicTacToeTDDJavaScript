@@ -16,8 +16,11 @@ class TicTacToe {
     this.setBox(x, y, this.lastPlayer);
     if (this.isWin()) {
       return `${this.lastPlayer} is the winner`;
+    } else if (this.isDraw()) {
+      return "The result is draw";
+    } else {
+      return "No winner";
     }
-    return "No winner";
   }
 
   checkAxis(axis) {
@@ -62,6 +65,17 @@ class TicTacToe {
       }
     }
     return false;
+  }
+
+  isDraw() {
+    for (let i = 0; i < this.SIZE; i++) {
+      for (let j = 0; j < this.SIZE; j++) {
+        if (this.board[i][j] === "") {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
 module.exports = TicTacToe;
