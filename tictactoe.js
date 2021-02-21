@@ -14,7 +14,7 @@ class TicTacToe {
     this.checkAxis(y);
     this.lastPlayer = this.nextPlayer();
     this.setBox(x, y, this.lastPlayer);
-    if (this.isWin()) {
+    if (this.isWin(x, y)) {
       return `${this.lastPlayer} is the winner`;
     } else if (this.isDraw()) {
       return "The result is draw";
@@ -29,7 +29,7 @@ class TicTacToe {
     }
   }
   //order change y,x due to array javascript order
-  setBox(y, x, lastPlayer) {
+  setBox(x, y, lastPlayer) {
     if (this.board[x - 1][y - 1] !== "") {
       throw new Error("Box is occupied");
     } else {
@@ -42,27 +42,25 @@ class TicTacToe {
     return "X";
   }
 
-  isWin() {
+  isWin(x, y) {
     const playerTotal = this.lastPlayer.repeat(3);
-    let diagonal1 = "";
-    let diagonal2 = "";
+    let diagonal1 =""
+      let diagonal2=""
+      let horizontal=""
+      let vertical = "";
     for (let index = 0; index < this.SIZE; index++) {
+      horizontal += this.board[index][y - 1];
+      vertical += this.board[x - 1][index];
       diagonal1 += this.board[index][index];
       diagonal2 += this.board[index][this.SIZE - index - 1];
-      if (
-        this.board[0][index] + this.board[1][index] + this.board[2][index] ===
-        playerTotal
-      ) {
-        return true;
-      } else if (
-        this.board[index][0] + this.board[index][1] + this.board[index][2] ===
-        playerTotal
-      ) {
-        return true;
-      }
-      if (diagonal1 === playerTotal || diagonal2 === playerTotal) {
-        return true;
-      }
+    }
+    if (
+      horizontal === playerTotal ||
+      vertical === playerTotal ||
+      diagonal1 === playerTotal ||
+      diagonal2 === playerTotal
+    ) {
+      return true;
     }
     return false;
   }
